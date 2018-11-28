@@ -1,0 +1,81 @@
+<div class="col-xl-12 col-lg-12 col-md-12">
+  <form #taskForm="ngForm">
+    <div class="border-bottom">
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label">Task: </label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" name="task" [(ngModel)]="taskName" />
+          </div>
+          <label class="col-sm-1 col-form-label">Parent Task: </label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" name="parent" [(ngModel)]="parentTaskName" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label">Proirty From: </label>
+          <div class="col-sm-2">
+            <input type="number" min="1" max="30" class="form-control" name="priortyFrom" [(ngModel)]="priortyFrom" />
+          </div>
+          <label class="col-sm-1 col-form-label">Proirty To: </label>
+          <div class="col-sm-2">
+            <input type="number" min="1" max="30" class="form-control" name="priortyTo" [(ngModel)]="priortyTo" />
+          </div>
+          <label class="col-sm-1 col-form-label">Start Date: </label>
+          <div class="col-sm-2">
+            <input type="text" placeholder="YYYY-MM-DD" ngbDatepicker #startDate="ngbDatepicker" (focus)="startDate.open()" class="form-control" name="fromDate" [(ngModel)]="fromDate" />
+          </div>
+          <label class="col-sm-1 col-form-label">End Date: </label>
+          <div class="col-sm-2">
+            <input type="text" placeholder="YYYY-MM-DD" ngbDatepicker #endDate="ngbDatepicker" dateFormat="dd-MMM-yyyy" (focus)="endDate.open()" class="form-control" name="toDate" [(ngModel)]="toDate" />
+          </div>
+        </div>
+    </div>
+
+    <div class="task-table">
+      <table>
+        <tr *ngFor="let taskList of taskData | filter : taskName : parentTaskName : priortyFrom: priortyTo : fromDate : toDate">
+          <td>
+            <div class="task-heading">Task</div>
+            <div class="task-information">
+
+              <div>{{taskList.task}}</div>
+            </div>
+          </td>
+          <td>
+            <div class="task-heading">Parent</div>
+            <div class="task-information">
+              <div>{{taskList.parent | findTaskById:taskData}}</div>
+            </div>
+          </td>
+          <td>
+            <div class="task-heading">Priorty</div>
+            <div class="task-information">{{taskList.priorty}}</div>
+          </td>
+          <td>
+            <div class="task-heading">Start</div>
+            <div class="task-information">{{taskList.fromDate | date: 'yyyy-MM-dd'}}</div>
+          </td>
+          <td>
+            <div class="task-heading">End</div>
+            <div class="task-information">{{taskList.toDate | date: 'yyyy-MM-dd'}}</div>
+          </td>
+          <td>
+            <div class="task-heading"></div>
+            <div class="task-information">
+              <button type="button" id="edit-task" ([ngModel])="edit" [disabled]="taskList.finished" (click)="editTask(taskList)" class="btn btn-primary">Edit</button>
+            </div>
+          </td>
+          <td>
+            <div class="task-heading"></div>
+            <div class="task-information">
+              <button type="button" id="end-task" ([ngModel])="endTask" [disabled]="taskList.finished" (click)="endTask(taskList)" class="btn btn-secondary">End Task</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="col-xl-12 col-lg-12 col-md-12">
+
+      </div>
+    </div>
+  </form>
+</div>
