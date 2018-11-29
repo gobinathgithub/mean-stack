@@ -1,5 +1,5 @@
 pipeline {
-  agent { dockerfileMeanStack }
+  agent { dockerfile true }
   stages {
     stage ('checkout') {
       steps {
