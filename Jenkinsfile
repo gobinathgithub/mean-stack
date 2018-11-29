@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'nodejs9.6.1' }
+  agent { dockerfile true }
   stages {
     stage ('checkout') {
       steps {
