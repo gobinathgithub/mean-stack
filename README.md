@@ -38,7 +38,7 @@
 <p><b><i>Set DB path to run MongoDB:</b></i> mongodb-4.0\bin>mongod –dbpath “...\mean-stack\db”</p>
 
 <h3>Docker</h3>
-<b>Comments:</b>
+<b>Commands:</b>
 <ul>
 	<li>docker-compose up - To run the docker to create images</li>
 	<li>docker-compose up --build - To update the changes to already created images</li>
